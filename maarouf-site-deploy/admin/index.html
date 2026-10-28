@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex"><title>Administration – Pr. Maarouf</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="/style.css">
+<style>
+.ad label{display:grid;gap:5px;font-weight:600;font-size:.9rem;color:var(--ink);margin:8px 0}
+.ad input,.ad textarea,.ad select{padding:10px 12px;border:1px solid #c6d3e0;border-radius:10px;font:400 .95rem Inter,Arial;background:#fff;color:#1d2b3a;width:100%;box-sizing:border-box}
+[data-theme=dark] .ad input,[data-theme=dark] .ad textarea,[data-theme=dark] .ad select{background:#16222f;color:#e6edf4;border-color:#2b3d50}
+.ad .card2{border:1px solid #c6d3e0;border-radius:14px;padding:14px 16px;margin:14px 0}
+[data-theme=dark] .ad .card2{border-color:#2b3d50}
+.ad .card2 .card2{margin-left:14px}
+.ad .row{display:flex;gap:8px;align-items:center;justify-content:space-between}
+.ad button,.ad .up{cursor:pointer;border:1px solid #5fd0d9;background:var(--teal);color:#fff;border-radius:30px;padding:8px 16px;font:600 .9rem Inter,Arial;display:inline-block;width:auto}
+.ad button.s{background:transparent;color:var(--ink);border-color:#9fb0c1;padding:4px 10px}
+.ad .up{text-align:center;margin:4px 0 10px;width:fit-content}
+.ad .bar{position:sticky;bottom:0;display:flex;gap:10px;align-items:center;padding:12px 0;background:var(--bg)}
+#msg{font-weight:600}
+</style></head><body>
+<header><a href="/index.html" class="brand serif"><b>Administration</b><span style="font-family:Inter,sans-serif">Professeur El Bekkaye Maarouf</span></a><nav><a href="/index.html">← Retour au site</a></nav><button id="tm" type="button" aria-label="Mode sombre" title="Mode sombre">🌙</button></header>
+<main class="ad" style="max-width:900px">
+<form id="login" hidden style="max-width:420px;margin:30px auto"><h2 class="serif">Connexion administrateur</h2>
+<label>E-mail<input type="email" id="em" required autocomplete="username"></label><label>Mot de passe<input type="password" id="pw" required autocomplete="current-password"></label><button type="submit">Se connecter</button></form>
+<div id="app" hidden><div class="filters" id="tabs"></div><div id="ed"></div>
+<div class="bar"><button id="save" type="button">💾 Enregistrer</button><button id="out" type="button" class="s">Déconnexion</button></div></div>
+<p id="msg" role="status"></p></main>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
+<script src="/config.js"></script><script src="/script.js"></script>
+<script>
+(function(){
+var $=function(s){return document.querySelector(s)},C=window.CFG||{};
+if(!C.url||C.url.indexOf('VOTRE')>-1){$('#msg').textContent='⚠ Renseignez config.js (URL et clé Supabase).';return}
+var sb=supabase.createClient(C.url,C.key),TABS={videos:'Vidéos',cours:'Cours & PDF',exercices:'Exercices',annales:'Annales',quiz:'Quiz'},S={},cur='videos',dirty={};
+var SEM=['S1','S2','S3','S4','S5','S6'];
+var DOC=[['titre','Titre'],['info','Affichage (ex : SMC · S5)'],['semestre','Semestre (filtre)','sel'],['fichier','Fichier PDF','file']];
+var F={videos:[['categorie','Catégorie'],['titre','Titre'],['description','Description','area'],['url','Lien YouTube (vidéo ou playlist)']],cours:DOC,exercices:DOC,annales:DOC};
+function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+function msg(t){$('#msg').textContent=t||''}
+function get(o,p){return p.split('.').reduce(function(a,k){return a[k]},o)}
+function set(o,p,v){var k=p.split('.'),l=k.pop();get2(o,k)[l]=v}
+function get2(o,k){return k.reduce(function(a,x){return a[x]},o)}
+function blank(p){if(/themes$/.test(p))return{titre:'',questions:[]};if(/questions$/.test(p))return{question:'',options:['','',''],bonne:1,explication:''};if(cur=='videos')return{categorie:'',titre:'',description:'',url:''};return{titre:'',info:'',semestre:'S1',fichier:''}}
+function ctl(p,i){return '<span><button type="button" class="s" data-a="up" data-p="'+p+'" data-i="'+i+'">↑</button> <button type="button" class="s" data-a="down" data-p="'+p+'" data-i="'+i+'">↓</button> <button type="button" class="s" data-a="del" data-p="'+p+'" data-i="'+i+'">✕</button></span>'}
+function fld(f,q,v){var l=f[1],t=f[2],val=v[f[0]]||'',p=q+'.'+f[0];
+if(t=='area')return '<label>'+l+'<textarea data-p="'+p+'" rows="2">'+esc(val)+'</textarea></label>';
+if(t=='sel')return '<label>'+l+'<select data-p="'+p+'">'+SEM.map(function(s){return '<option'+(s==val?' selected':'')+'>'+s+'</option>'}).join('')+'</select></label>';
+if(t=='file')return '<label>'+l+'<input data-p="'+p+'" value="'+esc(val)+'" placeholder="Lien du PDF"></label><label class="up">⬆ Téléverser un PDF<input type="file" accept="application/pdf" data-up="'+p+'" hidden></label>';
+return '<label>'+l+'<input data-p="'+p+'" value="'+esc(val)+'"></label>'}
+function add(p,l){return '<button type="button" data-a="add" data-p="'+p+'">+ '+l+'</button>'}
+function render(){
+$('#tabs').innerHTML=Object.keys(TABS).map(function(k){return '<button type="button" data-t="'+k+'" class="'+(k==cur?'on':'')+'">'+TABS[k]+'</button>'}).join('');
+var d=S[cur],h='';
+if(cur=='quiz'){h=d.themes.map(function(t,i){var tp='themes.'+i;return '<div class="card2"><div class="row"><b>Thème '+(i+1)+'</b>'+ctl('themes',i)+'</div><label>Titre du thème<input data-p="'+tp+'.titre" value="'+esc(t.titre)+'"></label>'+
+t.questions.map(function(q,j){var qp=tp+'.questions.'+j;return '<div class="card2"><div class="row"><b>Question '+(j+1)+'</b>'+ctl(tp+'.questions',j)+'</div><label>Question<input data-p="'+qp+'.question" value="'+esc(q.question)+'"></label><label>Options (une par ligne)<textarea rows="4" data-k="lines" data-p="'+qp+'.options">'+esc((q.options||[]).join('\n'))+'</textarea></label><label>N° de la bonne réponse (1 = première ligne)<input type="number" min="1" max="8" data-k="num" data-p="'+qp+'.bonne" value="'+esc(q.bonne)+'"></label><label>Explication<textarea rows="2" data-p="'+qp+'.explication">'+esc(q.explication)+'</textarea></label></div>'}).join('')+add(tp+'.questions','Ajouter une question')+'</div>'}).join('')+add('themes','Ajouter un thème')}
+else{h=d.items.map(function(x,i){var p='items.'+i;return '<div class="card2"><div class="row"><b>'+esc(x.titre||'Nouvel élément')+'</b>'+ctl('items',i)+'</div>'+F[cur].map(function(f){return fld(f,p,x)}).join('')+'</div>'}).join('')+add('items','Ajouter')}
+$('#ed').innerHTML=h}
+function show(ok){$('#login').hidden=ok;$('#app').hidden=!ok}
+async function start(){show(true);msg('Chargement…');
+for(var n in TABS){var r=await sb.from('content').select('data').eq('name',n).maybeSingle();S[n]=r.data?r.data.data:(n=='quiz'?{themes:[]}:{items:[]})}
+msg('');render()}
+sb.auth.getSession().then(function(r){if(r.data.session)start();else show(false)});
+$('#login').onsubmit=async function(e){e.preventDefault();msg('Connexion…');var r=await sb.auth.signInWithPassword({email:$('#em').value,password:$('#pw').value});if(r.error)msg('❌ E-mail ou mot de passe incorrect.');else start()};
+$('#out').onclick=async function(){await sb.auth.signOut();location.reload()};
+$('#tabs').onclick=function(e){var b=e.target.closest('[data-t]');if(b){cur=b.dataset.t;render()}};
+$('#ed').oninput=function(e){var t=e.target,p=t.dataset.p;if(!p)return;var v=t.value;if(t.dataset.k=='lines')v=v.split('\n').filter(function(x){return x.trim()});if(t.dataset.k=='num')v=+v||1;set(S[cur],p,v);dirty[cur]=1;msg('Modifications non enregistrées.')};
+$('#ed').onclick=function(e){var b=e.target.closest('[data-a]');if(!b)return;var a=b.dataset.a,p=b.dataset.p,L=get(S[cur],p),i=+b.dataset.i;
+if(a=='add')L.push(blank(p));else if(a=='del'){if(!confirm('Supprimer cet élément ?'))return;L.splice(i,1)}else{var j=a=='up'?i-1:i+1;if(j<0||j>=L.length)return;var x=L[i];L[i]=L[j];L[j]=x}
+dirty[cur]=1;msg('Modifications non enregistrées.');render()};
+$('#ed').onchange=async function(e){var q=e.target.dataset.up,f=e.target.files&&e.target.files[0];if(!q||!f)return;
+var name=Date.now()+'-'+f.name.normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^\w.-]+/g,'-');msg('Téléversement en cours…');
+var r=await sb.storage.from('pdfs').upload(name,f,{contentType:'application/pdf'});if(r.error){msg('❌ '+r.error.message);return}
+set(S[cur],q,sb.storage.from('pdfs').getPublicUrl(name).data.publicUrl);dirty[cur]=1;render();msg('PDF téléversé. Cliquez sur Enregistrer.')};
+$('#save').onclick=async function(){var ks=Object.keys(dirty);if(!ks.length){msg('Rien à enregistrer.');return}
+for(var i=0;i<ks.length;i++){var r=await sb.from('content').upsert({name:ks[i],data:S[ks[i]],updated_at:new Date().toISOString()});if(r.error){msg('❌ '+r.error.message);return}}
+dirty={};msg('✅ Enregistré. Le site est à jour.')};
+})();
+</script></body></html>

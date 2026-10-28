@@ -1,0 +1,16 @@
+{
+  "items": [
+    {
+      "titre": "Liaison chimique – Examen",
+      "info": "SMC · S2",
+      "semestre": "S2",
+      "fichier": "/cours/annale-liaison-chimique.pdf"
+    },
+    {
+      "titre": "Thermochimie – Examen",
+      "info": "SMC · S5",
+      "semestre": "S5",
+      "fichier": "/cours/annale-thermochimie.pdf"
+    }
+  ]
+}

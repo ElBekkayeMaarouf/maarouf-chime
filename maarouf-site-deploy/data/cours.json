@@ -1,0 +1,28 @@
+{
+  "items": [
+    {
+      "titre": "Thermochimie – Fascicule n°5",
+      "info": "SMC · S5",
+      "semestre": "S5",
+      "fichier": "/cours/thermochimie.pdf"
+    },
+    {
+      "titre": "Hydrocarbures et Fonctions Monovalentes",
+      "info": "SMC · S4",
+      "semestre": "S4",
+      "fichier": "/cours/hydrocarbures.pdf"
+    },
+    {
+      "titre": "Chimie des Solutions",
+      "info": "SMPC · S2",
+      "semestre": "S2",
+      "fichier": "/cours/solutions.pdf"
+    },
+    {
+      "titre": "Réactions Organiques",
+      "info": "SMC · S6",
+      "semestre": "S6",
+      "fichier": "/cours/reactions-organiques.pdf"
+    }
+  ]
+}

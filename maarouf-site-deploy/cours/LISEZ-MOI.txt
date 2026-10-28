@@ -1,0 +1,4 @@
+Mettez ici vos PDF avec exactement ces noms :
+thermochimie.pdf, hydrocarbures.pdf, solutions.pdf, reactions-organiques.pdf,
+serie3-corrigee.pdf, thermo-serie1.pdf, solutions-serie2.pdf,
+annale-liaison-chimique.pdf, annale-thermochimie.pdf

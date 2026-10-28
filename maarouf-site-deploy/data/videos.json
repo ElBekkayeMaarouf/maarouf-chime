@@ -1,0 +1,40 @@
+{
+  "items": [
+    {
+      "categorie": "Théorie des groupes",
+      "titre": "Théorie des groupes — Application à la chimie",
+      "description": "Série complète de vidéos sur la théorie des groupes et ses applications en chimie.",
+      "url": "https://youtube.com/playlist?list=PLhOO8nxQfxsgV4pL3upAU2WWpA5YlawN_&si=8k5aFPp_c4e2KQu4"
+    },
+    {
+      "categorie": "Théorie des groupes",
+      "titre": "Hybridation MX6",
+      "description": "Hybridation MX6 expliquée avec la théorie des groupes.",
+      "url": "https://www.youtube.com/watch?v=7PHaQVD6v1Y"
+    },
+    {
+      "categorie": "Théorie des groupes",
+      "titre": "Hybridation MX5",
+      "description": "Hybridation MX5 expliquée avec la théorie des groupes.",
+      "url": "https://www.youtube.com/watch?v=dKnfxaeaFuw"
+    },
+    {
+      "categorie": "Philosophie des sciences",
+      "titre": "Les crises épistémologiques",
+      "description": "Les crises épistémologiques dans l’histoire et l’évolution des sciences.",
+      "url": "https://www.youtube.com/watch?v=8JvAKW67AG4"
+    },
+    {
+      "categorie": "Philosophie des sciences",
+      "titre": "Constante de Planck h",
+      "description": "La constante de Planck et son importance en sciences physiques.",
+      "url": "https://www.youtube.com/watch?v=lxlIyWaIxDU"
+    },
+    {
+      "categorie": "Devoir surveillé",
+      "titre": "Devoir surveillé — ENSA Oujda",
+      "description": "Module de Chimie : correction du devoir surveillé de l’ENSA Oujda.",
+      "url": "https://www.youtube.com/watch?v=tN2yPs-wD1o"
+    }
+  ]
+}

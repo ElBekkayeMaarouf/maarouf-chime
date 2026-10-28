@@ -1,0 +1,6 @@
+1. supabase.com > New project (gratuit).
+2. SQL Editor > collez supabase-setup.sql > Run.
+3. Authentication > Sign In / Providers > désactivez "Allow new users to sign up".
+4. Authentication > Users > Add user > Create new user (e-mail + mot de passe, cochez Auto Confirm).
+5. Project Settings > API : copiez Project URL et la clé publique (anon / publishable) dans config.js.
+6. Déployez le dossier sur Netlify (glisser-déposer), puis ouvrez /admin/.

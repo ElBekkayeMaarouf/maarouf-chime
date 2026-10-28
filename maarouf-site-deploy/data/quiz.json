@@ -1,0 +1,104 @@
+{
+  "themes": [
+    {
+      "titre": "Thermochimie",
+      "questions": [
+        {
+          "question": "Une réaction exothermique est caractérisée par :",
+          "options": [
+            "ΔH > 0",
+            "ΔH < 0",
+            "ΔH = 0"
+          ],
+          "bonne": 2,
+          "explication": "Elle libère de la chaleur vers le milieu extérieur : ΔH < 0 (à pression constante)."
+        },
+        {
+          "question": "L’enthalpie standard de formation d’un corps simple stable à 298 K vaut :",
+          "options": [
+            "0",
+            "−1 kJ/mol",
+            "Elle dépend du corps"
+          ],
+          "bonne": 1,
+          "explication": "Par convention, ΔfH° d’un corps simple dans son état stable de référence est nulle."
+        },
+        {
+          "question": "La loi de Hess repose sur le fait que ΔH est :",
+          "options": [
+            "Dépendante du chemin suivi",
+            "Une fonction d’état",
+            "Toujours négative"
+          ],
+          "bonne": 2,
+          "explication": "H est une fonction d’état : ΔH ne dépend que de l’état initial et de l’état final."
+        },
+        {
+          "question": "À T et P constantes, une transformation est spontanée si :",
+          "options": [
+            "ΔG < 0",
+            "ΔG > 0",
+            "ΔS < 0"
+          ],
+          "bonne": 1,
+          "explication": "Le critère de spontanéité à T et P constantes est ΔG < 0."
+        },
+        {
+          "question": "Le premier principe de la thermodynamique s’écrit :",
+          "options": [
+            "ΔU = Q + W",
+            "ΔU = Q × W",
+            "ΔU = Q − T·ΔS"
+          ],
+          "bonne": 1,
+          "explication": "La variation d’énergie interne est égale à la somme de la chaleur et du travail échangés."
+        }
+      ]
+    },
+    {
+      "titre": "Liaison chimique",
+      "questions": [
+        {
+          "question": "Quelle est la géométrie de CO₂ selon VSEPR ?",
+          "options": [
+            "Coudée",
+            "Linéaire",
+            "Trigonale plane"
+          ],
+          "bonne": 2,
+          "explication": "CO₂ est de type AX₂ (sans doublet libre sur C) : molécule linéaire."
+        },
+        {
+          "question": "Quelle est la géométrie de H₂O (AX₂E₂) ?",
+          "options": [
+            "Linéaire",
+            "Tétraédrique",
+            "Coudée"
+          ],
+          "bonne": 3,
+          "explication": "Deux doublets liants et deux doublets libres : géométrie coudée (≈ 104,5°)."
+        },
+        {
+          "question": "Quel élément est le plus électronégatif ?",
+          "options": [
+            "Oxygène",
+            "Chlore",
+            "Fluor"
+          ],
+          "bonne": 3,
+          "explication": "Le fluor est l’élément le plus électronégatif de la classification."
+        },
+        {
+          "question": "L’ordre de liaison de O₂ (théorie des OM) est :",
+          "options": [
+            "1",
+            "2",
+            "3"
+          ],
+          "bonne": 2,
+          "explication": "O₂ : (10 − 6)/2 = 2, avec deux électrons célibataires (paramagnétique)."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "items": [
+    {
+      "titre": "Réactions Organiques – Série 3 corrigée",
+      "info": "SMC · S6",
+      "semestre": "S6",
+      "fichier": "/cours/serie3-corrigee.pdf"
+    },
+    {
+      "titre": "Thermochimie – Série 1 corrigée",
+      "info": "SMC · S5",
+      "semestre": "S5",
+      "fichier": "/cours/thermo-serie1.pdf"
+    },
+    {
+      "titre": "Chimie des Solutions – Série 2 corrigée",
+      "info": "SMPC · S2",
+      "semestre": "S2",
+      "fichier": "/cours/solutions-serie2.pdf"
+    }
+  ]
+}
